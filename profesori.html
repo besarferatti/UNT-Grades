@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vendos notën - UNT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('images/img12.jpg');">
+            <div class="wrap-login100">
+                <form class="login100-form" onsubmit="event.preventDefault();">
+                    <span class="login100-form-logo">
+                        <a href="./index.html"><img src="./images/img2.png" style="border-radius: 50%; margin-top: 10%;"></img></a>
+                    </span>
+
+                    <div class="wrap-input100" style=" margin-top: 100px;">
+                        <input id="emri" class="input100" type="text"  placeholder="Emri" required>
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+                    <div class="wrap-input100">
+                        <input id="indeksi" class="input100" type="text"  placeholder="Numri Indeksit" required>
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+                    <div class="wrap-input100">
+                        <input id="lenda" class="input100" type="text"  placeholder="Lënda" required>
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+                    <div class="wrap-input100">
+                        <input id="nota" class="input100" type="text"  placeholder="Nota" required>
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" onclick="vendosNota()">
+                            Vendos Notën
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-90 txt1" id="rezultati">
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function vendosNota() {
+            var emri = document.getElementById('emri').value;
+            var indeksi = document.getElementById('indeksi').value;
+            var lenda = document.getElementById('lenda').value;
+            var nota = document.getElementById('nota').value;
+
+            var folderPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/"));
+
+            var fileName = folderPath +  indeksi + '_nota.txt';
+
+            var content = emri +  ', \n<b>Lënda:<b> ' + lenda + ', \nNota:' + nota + '\n';
+
+            var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, fileName);
+        }
+
+        function saveAs(blob, fileName) {
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+        }
+    </script>
+</body>
+</html>
